@@ -20,6 +20,6 @@ web3.eth.getAccounts().then(function (accounts) {
         from: accounts[arg.from],
         gas: 3400000
     })
-        .on('receipt', console.log)
+        .on('receipt', (result) => console.log("Tx hash: " + result.transactionHash))
         .on('error', console.error)
 })

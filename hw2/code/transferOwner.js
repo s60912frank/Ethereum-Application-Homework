@@ -17,7 +17,7 @@ async function main() {
     try {
         const accounts = await web3.eth.getAccounts()
         let result = await bank.methods.transferOwner(accounts[arg.new_owner]).send({ from: accounts[arg.old_owner]})
-        console.log(result)
+        console.log("Tx hash: " + result.transactionHash)
     } catch (error) {
         console.log(error)
     }

@@ -9,19 +9,19 @@ const address = fs.readFileSync('../address.txt').toString()
 let bank = new web3.eth.Contract(abi, address)
 
 let arg = {
-    from: process.argv[2] || 0,
-    to: process.argv[3] || 1,
-    amount: process.argv[4] || 1
+    acc_num: process.argv[2] || 0,
+    amount: process.argv[3] || '3'
 }
 
 web3.eth.getAccounts().then(function (accounts) {
 
-    // transfer 1 ether from accounts[0] to accounts[1]
-    bank.methods.transfer(accounts[arg.to], arg.amount).send({
-        from: accounts[arg.from],
-        gas: 3400000
+    // accounts[0] deposit 3 ether
+    bank.methods.deposit().send({
+        from: accounts[arg.acc_num],
+        gas: 3400000,
+        value: web3.utils.toWei(arg.amount, 'ether')
     })
-        .on('receipt', console.log)
+        .on('receipt', (result) => console.log("Tx hash: " + result.transactionHash))
         .on('error', console.error)
 
 })

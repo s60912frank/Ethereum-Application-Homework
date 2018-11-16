@@ -17,7 +17,7 @@ async function main() {
     try {
         const account_address = (await web3.eth.getAccounts())[arg.from]
         let result = await bank.methods.buy(arg.amount).send({ from: account_address })
-        console.log(result)
+        console.log("Tx hash: " + result.transactionHash)
     } catch (error) {
         console.log(error)
     }
